@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <title>MOX Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/umd/lucide.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/umd/lucide.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0B0A15',
+                            800: '#13121D',
+                            700: '#1F1E29'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ajustes para o container principal */
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Ajustes para o Swiper */
+        .top10Swiper {
+            padding: 1rem 0;
+            overflow: hidden;
+            /* Alterado de 'visible' para 'hidden' */
+            width: 100%;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #9333ea;
+        }
+
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .swiper-button-prev:after,
+        .swiper-button-next:after {
+            font-size: 18px;
+        }
+
+        /* Corrige a sobreposição da paginação nos cards */
+        .swiper-pagination {
+            position: relative;
+            bottom: 0 !important;
+            margin-top: 15px;
+            z-index: 10;
+        }
+
+        /* Estilo para os bullets da paginação */
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background-color: #888888;
+            /* Cinza para os bullets não ativos */
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        /* Estilo para o bullet ativo da paginação */
+        .swiper-pagination-bullet-active {
+            background-color: #6a01a7;
+            /* Cor roxa/rosa padrão do site */
+            opacity: 1;
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Estilo para os cards não selecionados */
+        .swiper-slide {
+            opacity: 0.7;
+            filter: grayscale(30%);
+            transition: all 0.3s ease;
+            background-color: #2a2a2a;
+            /* Fundo cinza para cards não selecionados */
+        }
+
+        /* Estilo para o card selecionado/ativo */
+        .swiper-slide-active {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.05);
+            z-index: 2;
+            background-color: #3a3a3a;
+            /* Fundo um pouco mais claro para o card ativo */
+            border: 2px solid #6a01a7;
+            /* Borda roxa/rosa para destacar o card ativo */
+            border-radius: 7px;
+        }
+
+        /* Ajuste de espaçamento para evitar sobreposição */
+        .swiper-container {
+            padding-bottom: 40px;
+            margin-bottom: 20px;
+        }
+
+
+        footer {
+            background-color: #9233ea50;
+            color: white;
+            text-align: center;
+            padding: 5px 6px;
+            /* Adicionando padding para aumentar a largura do fundo */
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-family: 'Roboto', sans-serif;
+            /* Fonte personalizada */
+            letter-spacing: 2px;
+            /* Espaçamento entre as letras */
+        }
+
+        footer p {
+            font-size: 8px;
+            /* Tamanho da fonte */
+            font-weight: 700;
+            /* Negrito */
+            text-transform: uppercase;
+            /* Deixar tudo em maiúsculas */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* Sombra nas letras */
+            margin: 0;
+            /* Remover margens */
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                width: 32px;
+                height: 32px;
+            }
+
+            .swiper-button-prev:after,
+            .swiper-button-next:after {
+                font-size: 14px;
+            }
+
+            /* Pagination Bullets */
+            .swiper-pagination-bullet {
+                background: rgba(255, 255, 255, 0.3);
+                /* Cinza claro para bullets não ativos */
+                opacity: 1;
+                width: 8px;
+                /* Tamanho ajustado para melhor visibilidade */
+                height: 8px;
+                transition: background-color 0.3s ease;
+            }
+
+            .swiper-pagination-bullet-active {
+                background: #9333ea;
+                /* Mantém a cor roxa para o bullet ativo */
+                width: 10px;
+                /* Ligeiramente maior para o bullet ativo */
+                height: 10px;
+            }
+
+            /* Opcional: Adiciona um efeito hover para melhor interatividade */
+            .swiper-pagination-bullet:hover {
+                background: rgba(255, 255, 255, 0.5);
+            }
+
+            /* Pagination Styles */
+            .swiper-pagination {
+                position: relative;
+                margin-top: 10px;
+            }
+
+        }
+
+        /* Content Styles */
+        .ranking-number {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background: #9333ea;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .content-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            color: white;
+        }
+
+        .rating-star {
+            color: #ffd700;
+            margin-right: 2px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 640px) {
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                display: none;
+            }
+
+            .content-info h3 {
+                font-size: 12px;
+            }
+
+            .content-info p {
+                font-size: 10px;
+            }
+        }
+
+        /* Container adjustments */
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                max-width: 640px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+            }
+        }
+
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #0B0A15;
+            z-index: 50;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .navbar-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo-text {
+            color: #9333ea;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .navbar-logo-subtext {
+            color: white;
+            font-weight: 500;
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .navbar-logo-subtext {
+                display: inline;
+            }
+        }
+
+        .navbar-menu {
+            display: none;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-menu {
+                display: flex;
+            }
+        }
+
+        .navbar-menu-item {
+            color: white;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-menu-item:hover {
+            color: #a855f7;
+        }
+
+        .navbar-menu-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .navbar-search {
+            position: relative;
+            width: 100%;
+            max-width: 20rem;
+            margin-left: 1.5rem;
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .navbar-search {
+                display: block;
+            }
+        }
+
+        .navbar-search-input {
+            width: 100%;
+            background-color: #1F1E29;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            font-size: 0.875rem;
+            color: white;
+        }
+
+        .navbar-search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .navbar-search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #9333ea;
+        }
+
+        .navbar-search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1rem;
+            height: 1rem;
+            color: #9ca3af;
+        }
+
+        .navbar-toggle {
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: color 0.2s;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-toggle {
+                display: none;
+            }
+        }
+
+        .navbar-toggle:hover {
+            color: #a855f7;
+        }
+
+        .navbar-toggle-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .navbar-mobile-search {
+            padding-bottom: 0.5rem;
+            display: block;
+        }
+
+        @media (min-width: 640px) {
+            .navbar-mobile-search {
+                display: none;
+            }
+        }
+
+        .navbar-mobile-menu {
+            background-color: #13121D;
+            padding: 0.75rem 1rem;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+
+        .navbar-mobile-menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .navbar-mobile-menu-item {
+            color: white;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-mobile-menu-item:hover {
+            color: #a855f7;
+        }
+
+        .navbar-mobile-menu-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .navbar-menu-item.active,
+        .navbar-mobile-menu-item.active {
+            color: #9333ea;
+            font-weight: 500;
+        }
+
+        /* Streaming provider styles - Updated to match the screenshot */
+        .streaming-provider {
+            background-color: #13121D;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .streaming-provider:hover {
+            background-color: #1F1E29;
+            transform: translateY(-5px);
+        }
+
+        .provider-logo-container {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .provider-logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .provider-name {
+            font-size: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Streaming provider border styles to match the screenshot */
+        .streaming-provider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--border-color, transparent);
+        }
+
+        /* Responsive adjustments for streaming providers */
+        @media (max-width: 640px) {
+            .streaming-providers-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
+            }
+
+            .provider-logo-container {
+                height: 40px;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 768px) {
+            .streaming-providers-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .streaming-providers-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .streaming-providers-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+
+        /* Hamburger Menu Animation */
+        .hamburger-icon {
+            width: 24px;
+            height: 18px;
+            position: relative;
+            margin: 0;
+            transform: rotate(0deg);
+            transition: .5s ease-in-out;
+            cursor: pointer;
+        }
+
+        .hamburger-icon span {
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: white;
+            border-radius: 2px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger-icon span:nth-child(1) {
+            top: 0px;
+        }
+
+        .hamburger-icon span:nth-child(2),
+        .hamburger-icon span:nth-child(3) {
+            top: 8px;
+        }
+
+        .hamburger-icon span:nth-child(4) {
+            top: 16px;
+        }
+
+        .hamburger-icon.open span:nth-child(1) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+
+        .hamburger-icon.open span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+
+        .hamburger-icon.open span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+
+        .hamburger-icon.open span:nth-child(4) {
+            top: 8px;
+            width: 0%;
+            left: 50%;
+        }
+
+        /* Mobile Menu Animation */
+        .navbar-mobile-menu {
+            transform: translateY(-20px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-mobile-menu.visible {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Improve mobile menu styling */
+        .navbar-mobile-menu {
+            background-color: #13121D;
+            padding: 1rem;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-mobile-menu-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-mobile-menu-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+
+
+</head>
+
+<body class="bg-dark-900 text-white min-h-screen">
+<!-- Navbar com posicionamento correto -->
+<div class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-top">
+            <!-- Logo and Brand -->
+            <div class="navbar-logo">
+                <a href="index.html" class="flex items-center">
+                    <span class="navbar-logo-text">MOX</span>
+                    <span class="navbar-logo-subtext">Streaming</span>
+                </a>
+            </div>
+
+            <!-- Desktop Navigation (sem ícones) -->
+            <div class="navbar-menu">
+                <a href="index.html" class="navbar-menu-item active">
+                    <span>Início</span>
+                </a>
+                <a href="#popular-movies" class="navbar-menu-item">
+                    <span>Filmes</span>
+                </a>
+                <a href="#popular-series" class="navbar-menu-item">
+                    <span>Séries</span>
+                </a>
+                <a href="#popular-animes" class="navbar-menu-item">
+                    <span>Animes</span>
+                </a>
+                <a href="#popular-doramas" class="navbar-menu-item">
+                    <span>Doramas</span>
+                </a>
+                <a href="#popular-novelas" class="navbar-menu-item">
+                    <span>Novelas</span>
+                </a>
+                <a href="streaming-providers.html" class="navbar-menu-item">
+                    <span>Streaming</span>
+                </a>
+            </div>
+
+            <!-- Desktop Search -->
+            <div class="navbar-search">
+                <form id="search-form" action="search-results.html" method="get">
+                    <input type="search" id="search-input" name="query" class="navbar-search-input"
+                        placeholder="Buscar filmes, séries, animes...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+                </form>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="navbar-toggle" class="navbar-toggle" aria-label="Toggle menu">
+                <div class="hamburger-icon" id="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+
+        <!-- Mobile Search -->
+        <div class="navbar-mobile-search">
+            <div class="relative">
+                <form id="search-form-mobile" action="search-results.html" method="get">
+                    <input type="search" id="search-input-mobile" name="query" class="navbar-search-input"
+                        placeholder="Buscar filmes, séries, animes...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+                </form>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (com ícones) -->
+        <div id="mobile-menu" class="navbar-mobile-menu hidden">
+            <nav class="navbar-mobile-menu-items">
+                <a href="index.html" class="navbar-mobile-menu-item active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-mobile-menu-icon"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span>Início</span>
+                </a>
+                <a href="#popular-movies" class="navbar-mobile-menu-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-mobile-menu-icon"><rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18"></rect><line x1="7" x2="7" y1="2" y2="22"></line><line x1="17" x2="17" y1="2" y2="22"></line><line x1="2" x2="22" y1="12" y2="12"></line><line x1="2" x2="7" y1="7" y2="7"></line><line x1="2" x2="7" y1="17" y2="17"></line><line x1="17" x2="22" y1="17" y2="17"></line><line x1="17" x2="22" y1="7" y2="7"></line></svg>
+                    <span>Filmes</span>
+                </a>
+                <a href="#popular-series" class="navbar-mobile-menu-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-mobile-menu-icon"><rect width="20" height="15" x="2" y="7" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                    <span>Séries</span>
+                </a>
+                <a href="#popular-animes" class="navbar-mobile-menu-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-mobile-menu-icon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path><path d="M19 17.7c.4.2.8.3 1.2.3a3 3 0 0 0 0-6c-.4 0-.8.1-1.2.3"></path></svg>
+                    <span>Animes</span>
+                </a>
+                <a href="#popular-doramas" class="navbar-mobile-menu-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-mobile-menu-icon"><path d="M7 13h4"></path><path d="M15 13h2"></path><path d="M7 9h2"></path><path d="M13 9h4"></path><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10Z"></path></svg>
+                    <span>Doramas</span>
+                </a>
+                <a href="#popular-novelas" class="navbar-mobile-menu-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-mobile-menu-icon"><path d="M7 21h10"></path><rect width="20" height="14" x="2" y="3" rx="2"></rect></svg>
+                    <span>Novelas</span>
+                </a>
+                <a href="streaming-providers.html" class="navbar-mobile-menu-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="navbar-mobile-menu-icon"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <span>Streaming</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Update the main content section -->
+    <main class="container mx-auto px-4 pt-32 sm:pt-36">
+        <!-- Streaming Services Section -->
+        <section class="mb-6 sm:mb-8">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-4">Escolha por streaming</h2>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3 streaming-providers-grid">
+                <!-- Netflix -->
+                <a href="provider-content.html?id=8&name=Netflix" class="streaming-provider"
+                    style="--border-color: #E50914;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Netflix-mgfbqNfBothpZbT7h0T3sB2IysotNa.png"
+                            alt="Netflix" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Netflix'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Netflix</span>
+                </a>
+
+                <!-- Disney+ -->
+                <a href="provider-content.html?id=337&name=Disney+" class="streaming-provider"
+                    style="--border-color: #0063e5;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/disney-Fm9g7dJijjv01N3H8zVIhl8144HZlF.png"
+                            alt="Disney+" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Disney+'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Disney+</span>
+                </a>
+
+                <!-- Prime Video -->
+                <a href="provider-content.html?id=119&name=Prime Video" class="streaming-provider"
+                    style="--border-color: #00A8E1;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Primevideo-S6q8NqIraYvvB25GLZGZN7SK8ZO35V.png"
+                            alt="Prime Video" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Prime+Video'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Prime Video</span>
+                </a>
+
+                <!-- Max -->
+                <a href="provider-content.html?id=384&name=Max" class="streaming-provider"
+                    style="--border-color: #5822b4;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/max.jpg-dfBN2ugtfBFcmT3gily0bQZArIBPZJ.jpeg"
+                            alt="Max" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Max'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Max</span>
+                </a>
+
+                <!-- Globoplay -->
+                <a href="provider-content.html?id=307&name=Globoplay" class="streaming-provider"
+                    style="--border-color: #fb0234;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/globoplay-Khl6a4G29nvDTowXca0Av2ZdMMCAQS.png"
+                            alt="Globoplay" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Globoplay'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Globoplay</span>
+                </a>
+
+                <!-- Paramount+ -->
+                <a href="provider-content.html?id=531&name=Paramount+" class="streaming-provider"
+                    style="--border-color: #0064FF;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/paramount%2B-DkwYM58W2quinsDXu5WXZdbGGH8Wpz.png"
+                            alt="Paramount+" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Paramount+'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Paramount+</span>
+                </a>
+
+                <!-- Star+ -->
+                <a href="provider-content.html?id=619&name=Star+" class="streaming-provider"
+                    style="--border-color: #1a1a1a;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/star%2B-GtY6l5fXdwq1bkONiRn6Uw54ONLJjD.png"
+                            alt="Star+" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Star+'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Star+</span>
+                </a>
+
+                <!-- Apple TV+ -->
+                <a href="provider-content.html?id=350&name=Apple TV+" class="streaming-provider"
+                    style="--border-color: #000000;">
+                    <div class="provider-logo-container">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Appletv%2B.jpg-UANWopr4CgoIfIxiqNcJwlPuBElIgW.jpeg"
+                            alt="Apple TV+" class="provider-logo"
+                            onerror="this.src='https://via.placeholder.com/100x60?text=Apple+TV+'; this.onerror=null;">
+                    </div>
+                    <span class="provider-name">Apple TV+</span>
+                </a>
+
+                <!-- Ver Todos (on larger screens) -->
+                <a href="streaming-providers.html" class="streaming-provider hidden md:flex flex-col"
+                    style="--border-color: #9333ea;">
+                    <div class="provider-logo-container flex items-center justify-center">
+                        <i data-lucide="plus-circle" class="w-10 h-10 text-purple-500"></i>
+                    </div>
+                    <span class="provider-name">Ver Todos</span>
+                </a>
+            </div>
+
+            <!-- Ver Todos button (mobile only) -->
+            <div class="mt-3 text-center md:hidden">
+                <a href="streaming-providers.html"
+                    class="inline-flex items-center justify-center px-4 py-2 bg-purple-600 rounded-full text-sm hover:bg-purple-700 transition-colors">
+                    <i data-lucide="plus-circle" class="w-4 h-4 mr-1"></i>
+                    Ver Todos os Streamings
+                </a>
+            </div>
+        </section>
+
+        <!-- Top 10 Brasil Section -->
+        <section class="mb-6 sm:mb-8">
+            <h2 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-4">Top 10 Brasil Hoje</h2>
+            <div class="relative">
+                <div class="swiper top10Swiper">
+                    <div class="swiper-wrapper" id="top-10-content">
+                        <!-- Top 10 items will be inserted here by JavaScript -->
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <!-- Popular Movies -->
+        <section class="mb-6 sm:mb-8" id="popular-movies-section">
+            <h2 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">Popular - Movie</h2>
+            <div id="popular-movies"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-4">
+                <!-- Movie cards will be inserted here by JavaScript -->
+            </div>
+            <div id="popular-movies-pagination" class="mt-2 sm:mt-4 flex justify-center"></div>
+        </section>
+
+        <!-- Popular Series -->
+        <section class="mb-6 sm:mb-8" id="popular-series-section">
+            <h2 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">Popular - Series</h2>
+            <div id="popular-series"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-4">
+                <!-- Series cards will be inserted here by JavaScript -->
+            </div>
+            <div id="popular-series-pagination" class="mt-2 sm:mt-4 flex justify-center"></div>
+        </section>
+
+        <!-- Popular Animes -->
+        <section class="mb-6 sm:mb-8" id="popular-animes-section">
+            <h2 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">Popular - Animes</h2>
+            <div id="popular-animes"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-4">
+                <!-- Anime cards will be inserted here by JavaScript -->
+            </div>
+            <div id="popular-animes-pagination" class="mt-2 sm:mt-4 flex justify-center"></div>
+        </section>
+
+        <!-- Popular Doramas -->
+        <section class="mb-6 sm:mb-8" id="popular-doramas-section">
+            <h2 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">Popular - Doramas</h2>
+            <div id="popular-doramas"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-4">
+                <!-- Dorama cards will be inserted here by JavaScript -->
+            </div>
+            <div id="popular-doramas-pagination" class="mt-2 sm:mt-4 flex justify-center"></div>
+        </section>
+
+        <!-- Popular Novelas -->
+        <section class="mb-6 sm:mb-8" id="popular-novelas-section">
+            <h2 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">Popular - Novelas</h2>
+            <div id="popular-novelas"
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-4">
+                <!-- Novela cards will be inserted here by JavaScript -->
+            </div>
+            <div id="popular-novelas-pagination" class="mt-2 sm:mt-4 flex justify-center"></div>
+        </section>
+    </main>
+
+    class="mt-2 sm:mt-4 flex justify-center"></div>
+    </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButton = document.getElementById('navbar-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+
+            toggleButton.addEventListener('click', function () {
+                hamburgerIcon.classList.toggle('open');
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('visible');
+            });
+
+            // Close mobile menu when clicking on a link
+            const mobileMenuLinks = document.querySelectorAll('.navbar-mobile-menu-item');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    hamburgerIcon.classList.remove('open');
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('visible');
+                });
+            });
+
+            // Setup search functionality
+            setupSearch();
+
+            // Highlight active menu item
+            highlightActiveMenuItem();
+        });
+
+        // Function to handle search
+        function setupSearch() {
+            const searchForm = document.getElementById('search-form');
+            const searchFormMobile = document.getElementById('search-form-mobile');
+
+            if (searchForm) {
+                searchForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const query = document.getElementById('search-input').value.trim();
+                    if (query) {
+                        window.location.href = `search-results.html?query=${encodeURIComponent(query)}`;
+                    }
+                });
+            }
+
+            if (searchFormMobile) {
+                searchFormMobile.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const query = document.getElementById('search-input-mobile').value.trim();
+                    if (query) {
+                        window.location.href = `search-results.html?query=${encodeURIComponent(query)}`;
+                    }
+                });
+            }
+
+            // Compatibilidade com o código existente
+            if (typeof searchMedia === 'function') {
+                const searchInputs = document.querySelectorAll('#search-input, #search-input-mobile');
+                searchInputs.forEach(input => {
+                    input.addEventListener('input', function () {
+                        clearTimeout(window.searchDebounceTimer);
+                        window.searchDebounceTimer = setTimeout(searchMedia, 500);
+                    });
+                });
+            }
+        }
+
+        // Function to highlight active menu item
+        function highlightActiveMenuItem() {
+            // Get current page path
+            const currentPath = window.location.pathname;
+
+            // Find all menu items
+            const menuItems = document.querySelectorAll('.navbar-menu-item, .navbar-mobile-menu-item');
+
+            // Check if we're on the home page
+            const isHomePage = currentPath.endsWith('index.html') || currentPath.endsWith('/');
+
+            // Loop through menu items and add active class
+            menuItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (isHomePage && href && (href === 'index.html' || href === './')) {
+                    item.classList.add('active');
+                } else if (href && currentPath.includes(href.split('#')[0])) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+    </script>
+    <footer>
+        <p>Desenvolvido por Kayohan Costa</p>
+    </footer>
+</body>
+
+</html>

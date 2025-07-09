@@ -1,0 +1,231 @@
+:root {
+  --background-color: #0b0a15;
+  --sidebar-color: #13121d;
+  --search-bg: #1f1e29;
+  --text-color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Add these styles to your existing CSS */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top10Swiper {
+  padding: 1rem 0;
+  overflow: visible;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .top10Swiper {
+    padding: 0.5rem 0;
+  }
+}
+
+/* Update swiper styles */
+.swiper-slide {
+  width: 100%;
+  height: auto !important;
+}
+
+@media (min-width: 640px) {
+  .swiper-slide {
+    width: calc(50% - 1rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper-slide {
+    width: calc(33.333% - 1rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .swiper-slide {
+    width: calc(25% - 1rem);
+  }
+}
+
+
+/* Sidebar Styles */
+.sidebar {
+  width: 64px;
+  background-color: var(--sidebar-color);
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: fixed;
+  height: 100vh;
+}
+
+.home-icon,
+.sidebar-icon {
+  color: var(--text-color);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0.5rem;
+}
+
+.home-icon:hover,
+.sidebar-icon:hover {
+  opacity: 1;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex: 1;
+  margin-left: 64px;
+  padding: 2rem;
+}
+
+/* Search Bar Styles */
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background-color: var(--search-bg);
+  border: none;
+  border-radius: 24px;
+  padding: 12px 48px 12px 24px;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Content Section Styles */
+.content-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Movie Card Styles */
+.movie-card {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-card .title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: var(--text-color);
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 48px;
+  }
+
+  .main-content {
+    margin-left: 48px;
+    padding: 1rem;
+  }
+
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  font-family: 'Roboto', sans-serif; /* Fonte personalizada */
+  letter-spacing: 2px; /* Espaçamento entre as letras */
+}
+
+footer p {
+  font-size: 18px; /* Tamanho da fonte */
+  font-weight: 700; /* Negrito */
+  text-transform: uppercase; /* Deixar tudo em maiúsculas */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra nas letras */
+  margin: 0; /* Remover margens */
+}
+
+
+

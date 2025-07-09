@@ -1,0 +1,685 @@
+[
+    {
+        "id": 1,
+        "Nome do canal": "Hotgo XXX",
+        "Link": "https://superflixapi.link/tv/hotgo-xxx",
+        "logo": ""
+    },
+    {
+        "id": 2,
+        "Nome do canal": "Private XXX",
+        "Link": "https://superflixapi.link/tv/private-xxx",
+        "logo": ""
+    },
+    {
+        "id": 3,
+        "Nome do canal": "Penthouse XXX",
+        "Link": "https://superflixapi.link/tv/penthouse-xxx",
+        "logo": ""
+    },
+    {
+        "id": 4,
+        "Nome do canal": "Sex Privé XXX",
+        "Link": "https://superflixapi.link/tv/sex-privé-xxx",
+        "logo": ""
+    },
+    {
+        "id": "5",
+        "Nome do canal": "Venus XXX",
+        "Link": "https://superflixapi.link/tv/venus-xxx",
+        "logo": ""
+    },
+    {
+        "id": "6",
+        "Nome do canal": "Playboy TV XXX",
+        "Link": "https://superflixapi.link/tv/playboy-tv-xxx",
+        "logo": ""
+    },
+    {
+        "id": "7",
+        "Nome do canal": "Dream Sex XXX",
+        "Link": "https://superflixapi.link/tv/dream-sex-xxx",
+        "logo": ""
+    },
+    {
+        "id": "8",
+        "Nome do canal": "Sexy Hot",
+        "Link": "https://superflixapi.link/tv/sexy-hot",
+        "logo": ""
+    },
+    {
+        "id": "9",
+        "Nome do canal": "Sexprive",
+        "Link": "https://superflixapi.link/tv/sexprive",
+        "logo": ""
+    },
+    {
+        "id": "10",
+        "Nome do canal": "Sextreme XXX",
+        "Link": "https://superflixapi.link/tv/sextreme-xxx",
+        "logo": ""
+    },
+    {
+        "id": "11",
+        "Nome do canal": "BBB 25",
+        "Link": "https://superflixapi.link/tv/bbb-25",
+        "logo": ""
+    },
+    {
+        "id": "12",
+        "Nome do canal": "Paramount 3",
+        "Link": "https://superflixapi.link/tv/paramount-3",
+        "logo": ""
+    },
+    {
+        "id": "13",
+        "Nome do canal": "Paramount 4",
+        "Link": "https://superflixapi.link/tv/paramount-4",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Prime Video 4",
+        "Link": "https://superflixapi.link/tv/prime-video-4",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Prime Video 3",
+        "Link": "https://superflixapi.link/tv/prime-video-3",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Prime Video 2",
+        "Link": "https://superflixapi.link/tv/prime-video-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Prime Video 1",
+        "Link": "https://superflixapi.link/tv/prime-video-1",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Paramount 2",
+        "Link": "https://superflixapi.link/tv/paramount-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Paramount 1",
+        "Link": "https://superflixapi.link/tv/paramount-1",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Modo Viagem",
+        "Link": "https://superflixapi.link/tv/modo-viagem",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Canção Nova",
+        "Link": "https://superflixapi.link/tv/cancao-nova",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "MTV Live",
+        "Link": "https://superflixapi.link/tv/mtv-live",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "truTV",
+        "Link": "https://superflixapi.link/tv/trutv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "TNT Novelas",
+        "Link": "https://superflixapi.link/tv/tnt-novelas",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Star 3",
+        "Link": "https://superflixapi.link/tv/star-3",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Woohoo",
+        "Link": "https://superflixapi.link/tv/woohoo",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "TV Ra Tim Bum",
+        "Link": "https://superflixapi.link/tv/tv-ra-tim-bum",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HGTV",
+        "Link": "https://superflixapi.link/tv/hgtv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Discovery Channel",
+        "Link": "https://superflixapi.link/tv/discovery-channel",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Arte 1",
+        "Link": "https://superflixapi.link/tv/arte1",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "CNN Brasil",
+        "Link": "https://superflixapi.link/tv/cnn-brasil",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Gloob",
+        "Link": "https://superflixapi.link/tv/gloob",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Cartoon Network",
+        "Link": "https://superflixapi.link/tv/cartoon-network",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Discovery Kids",
+        "Link": "https://superflixapi.link/tv/discovery-kids",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Disney Channel",
+        "Link": "https://superflixapi.link/tv/disney-channel",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Gloobinho",
+        "Link": "https://superflixapi.link/tv/gloobinho",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Nickelodeon",
+        "Link": "https://superflixapi.link/tv/nickelodeon",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Nick Jr.",
+        "Link": "https://superflixapi.link/tv/nick-jr",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Tooncast",
+        "Link": "https://superflixapi.link/tv/tooncast",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Cartoonito",
+        "Link": "https://superflixapi.link/tv/cartoonito",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "National Geographic Channel",
+        "Link": "https://superflixapi.link/tv/national-geographic-channel",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "H2",
+        "Link": "https://superflixapi.link/tv/h2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "History Channel",
+        "Link": "https://superflixapi.link/tv/history-channel",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "ESPN 3",
+        "Link": "https://superflixapi.link/tv/espn-3",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "ESPN 4",
+        "Link": "https://superflixapi.link/tv/espn-4",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Band Sports",
+        "Link": "https://superflixapi.link/tv/band-sports",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "UFC Fight Pass",
+        "Link": "https://superflixapi.link/tv/ufc-fight-pass",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Discovery Turbo",
+        "Link": "https://superflixapi.link/tv/discovery-turbo",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "StarPlus Eventos",
+        "Link": "https://superflixapi.link/tv/starplus-eventos",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Fox Sports 2",
+        "Link": "https://superflixapi.link/tv/fox-sports-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Sportv",
+        "Link": "https://superflixapi.link/tv/sportv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Sportv 2",
+        "Link": "https://superflixapi.link/tv/sportv-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Sportv 3",
+        "Link": "https://superflixapi.link/tv/sportv-3",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Combate",
+        "Link": "https://superflixapi.link/tv/combate",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "AMC",
+        "Link": "https://superflixapi.link/tv/amc",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "AXN",
+        "Link": "https://superflixapi.link/tv/axn",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Star Channel",
+        "Link": "https://superflixapi.link/tv/star-channel",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Star 1",
+        "Link": "https://superflixapi.link/tv/star-1",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Star 2",
+        "Link": "https://superflixapi.link/tv/star-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Star 4",
+        "Link": "https://superflixapi.link/tv/star-4",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Cinemax",
+        "Link": "https://superflixapi.link/tv/cinemax",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Megapix",
+        "Link": "https://superflixapi.link/tv/megapix",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Canal Sony",
+        "Link": "https://superflixapi.link/tv/canal-sony",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "TCM",
+        "Link": "https://superflixapi.link/tv/tcm",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Telecine Premium",
+        "Link": "https://superflixapi.link/tv/telecine-premium",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Telecine Action",
+        "Link": "https://superflixapi.link/tv/telecine-action",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Telecine Touch",
+        "Link": "https://superflixapi.link/tv/telecine-touch",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Telecine Fun",
+        "Link": "https://superflixapi.link/tv/telecine-fun",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Telecine Pipoca",
+        "Link": "https://superflixapi.link/tv/telecine-pipoca",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Telecine Cult",
+        "Link": "https://superflixapi.link/tv/telecine-cult",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "TNT",
+        "Link": "https://superflixapi.link/tv/tnt",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "TNT Series",
+        "Link": "https://superflixapi.link/tv/tnt-series",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Universal Channel",
+        "Link": "https://superflixapi.link/tv/universal-channel",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Warner TV",
+        "Link": "https://superflixapi.link/tv/warner-tv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "FX",
+        "Link": "https://superflixapi.link/tv/fx",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Space",
+        "Link": "https://superflixapi.link/tv/space",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Studio Universal",
+        "Link": "https://superflixapi.link/tv/studio-universal",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Syfy",
+        "Link": "https://superflixapi.link/tv/syfy",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Paramount Channel",
+        "Link": "https://superflixapi.link/tv/paramount-channel",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Canal Brasil",
+        "Link": "https://superflixapi.link/tv/canal-brasil",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Animal Planet",
+        "Link": "https://superflixapi.link/tv/animal-planet",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Discovery Science",
+        "Link": "https://superflixapi.link/tv/discovery-science",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Discovery Theater",
+        "Link": "https://superflixapi.link/tv/discovery-theater",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "ESPN 2",
+        "Link": "https://superflixapi.link/tv/espn-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "ESPN",
+        "Link": "https://superflixapi.link/tv/espn",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "ESPN Extra",
+        "Link": "https://superflixapi.link/tv/espn-extra",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere 8",
+        "Link": "https://superflixapi.link/tv/premiere-8",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere 7",
+        "Link": "https://superflixapi.link/tv/premiere-7",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere 6",
+        "Link": "https://superflixapi.link/tv/premiere-6",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere 5",
+        "Link": "https://superflixapi.link/tv/premiere-5",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere 4",
+        "Link": "https://superflixapi.link/tv/premiere-4",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere 3",
+        "Link": "https://superflixapi.link/tv/premiere-3",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere 2",
+        "Link": "https://superflixapi.link/tv/premiere-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Premiere Clubes",
+        "Link": "https://superflixapi.link/tv/premiere-clubes",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "A Fazenda 2",
+        "Link": "https://superflixapi.link/tv/a-fazenda-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "A Fazenda",
+        "Link": "https://superflixapi.link/tv/a-fazenda",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO 2",
+        "Link": "https://superflixapi.link/tv/hbo-2",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO",
+        "Link": "https://superflixapi.link/tv/hbo",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO Family",
+        "Link": "https://superflixapi.link/tv/hbo-family",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO Plus",
+        "Link": "https://superflixapi.link/tv/hbo-plus",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO Signature",
+        "Link": "https://superflixapi.link/tv/hbo-signature",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO Pop",
+        "Link": "https://superflixapi.link/tv/hbo-pop",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO Xtreme",
+        "Link": "https://superflixapi.link/tv/hbo-xtreme",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "HBO Mundi",
+        "Link": "https://superflixapi.link/tv/hbo-mundi",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "MTV",
+        "Link": "https://superflixapi.link/tv/mtv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Food Network",
+        "Link": "https://superflixapi.link/tv/food-network",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "TLC",
+        "Link": "https://superflixapi.link/tv/tlc",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Canal Off",
+        "Link": "https://superflixapi.link/tv/canal-off",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Multishow",
+        "Link": "https://superflixapi.link/tv/multishow",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Lifetime",
+        "Link": "https://superflixapi.link/tv/lifetime",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "ID Discovery",
+        "Link": "https://superflixapi.link/tv/id-discovery",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "GNT",
+        "Link": "https://superflixapi.link/tv/gnt",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "NBA League Pass",
+        "Link": "https://superflixapi.link/tv/nba-league-pass",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Fish TV",
+        "Link": "https://superflixapi.link/tv/fish-tv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Discovery World",
+        "Link": "https://superflixapi.link/tv/discovery-world",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Discovery Home & Health",
+        "Link": "https://superflixapi.link/tv/discovery-home-health",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "BIS",
+        "Link": "https://superflixapi.link/tv/bis",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Curta",
+        "Link": "https://superflixapi.link/tv/curta",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "AE",
+        "Link": "https://superflixapi.link/tv/ae",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "E! Entertainment Television",
+        "Link": "https://superflixapi.link/tv/e-entertainment-television",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Viva",
+        "Link": "https://superflixapi.link/tv/viva",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Record News",
+        "Link": "https://superflixapi.link/tv/record-news",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Globo News",
+        "Link": "https://superflixapi.link/tv/globo-news",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Band News",
+        "Link": "https://superflixapi.link/tv/band-news",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Cinecanal",
+        "Link": "https://superflixapi.link/tv/cinecanal",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "SBT",
+        "Link": "https://superflixapi.link/tv/sbt",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Band",
+        "Link": "https://superflixapi.link/tv/band",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Record TV",
+        "Link": "https://superflixapi.link/tv/record-tv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "RedeTV",
+        "Link": "https://superflixapi.link/tv/redetv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Globo MG",
+        "Link": "https://superflixapi.link/tv/globo-mg",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Globo RJ",
+        "Link": "https://superflixapi.link/tv/globo-rj",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Comedy Central",
+        "Link": "https://superflixapi.link/tv/comedy-central",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "AnimeTV",
+        "Link": "https://superflixapi.link/tv/animetv",
+        "logo": ""
+    },
+    {
+        "Nome do canal": "Globo SP",
+        "Link": "https://superflixapi.link/tv/globo-sp",
+        "logo": ""
+    }
+]

@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+    <title>Resultados da Pesquisa - MOX Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/umd/lucide.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/umd/lucide.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0B0A15',
+                            800: '#13121D',
+                            700: '#1F1E29'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0B0A15;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-poster {
+            height: 0;
+            padding-bottom: 150%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-poster img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        footer {
+            background-color: #9233ea50;
+            color: white;
+            text-align: center;
+            padding: 5px 6px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        footer p {
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 0;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #0B0A15;
+            z-index: 50;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .navbar-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo-text {
+            color: #9333ea;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .navbar-logo-subtext {
+            color: white;
+            font-weight: 500;
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .navbar-logo-subtext {
+                display: inline;
+            }
+        }
+
+        .navbar-menu {
+            display: none;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-menu {
+                display: flex;
+            }
+        }
+
+        .navbar-menu-item {
+            color: white;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-menu-item:hover {
+            color: #a855f7;
+        }
+
+        .navbar-menu-item.active,
+        .navbar-mobile-menu-item.active {
+            color: #9333ea;
+            font-weight: 500;
+        }
+
+        .navbar-menu-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .navbar-search {
+            position: relative;
+            width: 100%;
+            max-width: 20rem;
+            margin-left: 1.5rem;
+            display: none;
+        }
+
+        @media (min-width: 640px) {
+            .navbar-search {
+                display: block;
+            }
+        }
+
+        .navbar-search-input {
+            width: 100%;
+            background-color: #1F1E29;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            font-size: 0.875rem;
+            color: white;
+        }
+
+        .navbar-search-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .navbar-search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #9333ea;
+        }
+
+        .navbar-search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1rem;
+            height: 1rem;
+            color: #9ca3af;
+        }
+
+        .navbar-toggle {
+            display: flex;
+            align-items: center;
+            color: white;
+            transition: color 0.2s;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-toggle {
+                display: none;
+            }
+        }
+
+        .navbar-toggle:hover {
+            color: #a855f7;
+        }
+
+        .navbar-toggle-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .navbar-mobile-search {
+            padding-bottom: 0.5rem;
+            display: block;
+        }
+
+        @media (min-width: 640px) {
+            .navbar-mobile-search {
+                display: none;
+            }
+        }
+
+        .navbar-mobile-menu {
+            background-color: #13121D;
+            padding: 0.75rem 1rem;
+            border-bottom-left-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+
+        .navbar-mobile-menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .navbar-mobile-menu-item {
+            color: white;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+
+        .navbar-mobile-menu-item:hover {
+            color: #a855f7;
+        }
+
+        .navbar-mobile-menu-item.active {
+            color: #9333ea;
+            font-weight: 500;
+        }
+
+        .navbar-mobile-menu-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Pagination styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .pagination-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.25rem;
+            background-color: #1F1E29;
+            color: #9ca3af;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .pagination-button:hover {
+            background-color: #2d2c3a;
+            color: white;
+        }
+
+        .pagination-button.active {
+            background-color: #9333ea;
+            color: white;
+        }
+
+        .pagination-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-button.disabled:hover {
+            background-color: #1F1E29;
+            color: #9ca3af;
+        }
+
+        /* Content type badge */
+        .content-type-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-top">
+                <!-- Logo and Brand -->
+                <div class="navbar-logo">
+                    <a href="index.html" class="flex items-center">
+                        <span class="navbar-logo-text">MOX</span>
+                        <span class="navbar-logo-subtext">Streaming</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="navbar-menu">
+                    <a href="index.html" class="navbar-menu-item">
+                        <i data-lucide="home" class="navbar-menu-icon"></i>
+                        <span>Início</span>
+                    </a>
+                    <a href="index.html#popular-movies" class="navbar-menu-item">
+                        <i data-lucide="film" class="navbar-menu-icon"></i>
+                        <span>Filmes</span>
+                    </a>
+                    <a href="index.html#popular-series" class="navbar-menu-item">
+                        <i data-lucide="tv" class="navbar-menu-icon"></i>
+                        <span>Séries</span>
+                    </a>
+                    <a href="index.html#popular-animes" class="navbar-menu-item">
+                        Animes
+                    </a>
+                    <a href="index.html#popular-doramas" class="navbar-menu-item">
+                        Doramas
+                    </a>
+                    <a href="index.html#popular-novelas" class="navbar-menu-item">
+                        Novelas
+                    </a>
+                    <a href="streaming-providers.html" class="navbar-menu-item">
+                        <i data-lucide="play" class="navbar-menu-icon"></i>
+                        <span>Streaming</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Search -->
+                <div class="navbar-search">
+                    <form id="search-form" action="search-results.html" method="get">
+                        <input type="search" id="search-input" name="query" class="navbar-search-input"
+                            placeholder="Buscar filmes, séries, animes...">
+                        <i data-lucide="search" class="navbar-search-icon"></i>
+                    </form>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="navbar-toggle" class="navbar-toggle" aria-label="Toggle menu">
+                    <i data-lucide="menu" id="menu-icon" class="navbar-toggle-icon"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Search -->
+            <div class="navbar-mobile-search">
+                <div class="relative">
+                    <form id="search-form-mobile" action="search-results.html" method="get">
+                        <input type="search" id="search-input-mobile" name="query" class="navbar-search-input"
+                            placeholder="Buscar filmes, séries, animes...">
+                        <i data-lucide="search" class="navbar-search-icon"></i>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobile-menu" class="navbar-mobile-menu hidden">
+                <nav class="navbar-mobile-menu-items">
+                    <a href="index.html" class="navbar-mobile-menu-item">
+                        <i data-lucide="home" class="navbar-mobile-menu-icon"></i>
+                        <span>Início</span>
+                    </a>
+                    <a href="index.html#popular-movies" class="navbar-mobile-menu-item">
+                        <i data-lucide="film" class="navbar-mobile-menu-icon"></i>
+                        <span>Filmes</span>
+                    </a>
+                    <a href="index.html#popular-series" class="navbar-mobile-menu-item">
+                        <i data-lucide="tv" class="navbar-mobile-menu-icon"></i>
+                        <span>Séries</span>
+                    </a>
+                    <a href="index.html#popular-animes" class="navbar-mobile-menu-item">
+                        Animes
+                    </a>
+                    <a href="index.html#popular-doramas" class="navbar-mobile-menu-item">
+                        Doramas
+                    </a>
+                    <a href="index.html#popular-novelas" class="navbar-mobile-menu-item">
+                        Novelas
+                    </a>
+                    <a href="streaming-providers.html" class="navbar-mobile-menu-item">
+                        <i data-lucide="play" class="navbar-mobile-menu-icon"></i>
+                        <span>Streaming</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pt-32 sm:pt-36 pb-16">
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold" id="search-title">Resultados da Pesquisa</h1>
+            <div class="flex gap-2">
+                <button id="filter-movies" class="px-3 py-1 bg-dark-700 rounded-full text-sm hover:bg-dark-600 transition-colors">Filmes</button>
+                <button id="filter-tv" class="px-3 py-1 bg-dark-700 rounded-full text-sm hover:bg-dark-600 transition-colors">Séries</button>
+                <button id="filter-all" class="px-3 py-1 bg-purple-600 rounded-full text-sm hover:bg-purple-700 transition-colors">Todos</button>
+            </div>
+        </div>
+
+        <!-- Search Results Grid -->
+        <div id="search-results" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            <!-- Results will be loaded here by JavaScript -->
+            <div class="flex justify-center items-center col-span-full py-10">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be generated by JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por Kayohan Costa</p>
+    </footer>
+
+    <script src="search-results.js"></script>
+    <script>
+        // Initialize Lucide icons - with safety check
+        if (typeof lucide !== "undefined") {
+            lucide.createIcons();
+        } else {
+            // If lucide is not defined yet, wait for it to load
+            document.addEventListener('lucide-loaded', function() {
+                lucide.createIcons();
+            });
+            
+            // Set a fallback if lucide doesn't load properly
+            window.addEventListener('load', function() {
+                if (typeof lucide !== "undefined") {
+                    lucide.createIcons();
+                }
+            });
+        }
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButton = document.getElementById('navbar-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            // Make lucide available globally if needed
+            if (typeof lucide === "undefined" && typeof window.lucide !== "undefined") {
+                window.lucide = lucide;
+            }
+
+            toggleButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+
+                // Change icon based on menu state
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                } else {
+                    menuIcon.setAttribute('data-lucide', 'x');
+                }
+
+                // Re-initialize icons to update the toggle icon
+                if (typeof lucide !== "undefined") {
+                    lucide.createIcons();
+                } else if (typeof window.lucide !== "undefined") {
+                    window.lucide.createIcons();
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            const mobileMenuLinks = document.querySelectorAll('.navbar-mobile-menu-item');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                    if (typeof lucide !== "undefined") {
+                        lucide.createIcons();
+                    } else if (typeof window.lucide !== "undefined") {
+                        window.lucide.createIcons();
+                    }
+                });
+            });
+
+            // Setup search functionality
+            setupSearch();
+          
+            // Pre-fill search input with query from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query');
+            if (query) {
+                const searchInputs = document.querySelectorAll('#search-input, #search-input-mobile');
+                searchInputs.forEach(input => {
+                    input.value = query;
+                });
+            }
+        });
+
+        // Function to handle search
+        function setupSearch() {
+            const searchForm = document.getElementById('search-form');
+            const searchFormMobile = document.getElementById('search-form-mobile');
+
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const query = document.getElementById('search-input').value.trim();
+                    if (query) {
+                        window.location.href = `search-results.html?query=${encodeURIComponent(query)}`;
+                    }
+                });
+            }
+
+            if (searchFormMobile) {
+                searchFormMobile.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const query = document.getElementById('search-input-mobile').value.trim();
+                    if (query) {
+                        window.location.href = `search-results.html?query=${encodeURIComponent(query)}`;
+                    }
+                });
+            }
+            
+            // Pre-fill search input with query from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query');
+            if (query) {
+                const searchInputs = document.querySelectorAll('#search-input, #search-input-mobile');
+                searchInputs.forEach(input => {
+                    input.value = query;
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
+

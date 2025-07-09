@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Conteúdo</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <style>
+        /* Custom scrollbar for cast section */
+        .scrollbar-custom::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: rgba(147, 51, 234, 0.5);
+            border-radius: 10px;
+        }
+
+        .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+            background: rgba(147, 51, 234, 0.7);
+        }
+
+        /* Hide scrollbar for Firefox */
+        .scrollbar-custom {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(147, 51, 234, 0.5) rgba(255, 255, 255, 0.1);
+        }
+
+        /* For mobile touch scrolling */
+        .cast-scroll {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scroll-snap-type: x proximity;
+        }
+
+        .cast-scroll>div {
+            scroll-snap-align: start;
+        }
+
+        /* Modal animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #server-modal {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        #server-modal>div {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Server button hover effect */
+        .server-btn:hover svg {
+            transform: translateX(5px);
+            transition: transform 0.2s ease;
+        }
+
+        .server-btn svg {
+            transition: transform 0.2s ease;
+        }
+
+        /* Player container styles */
+        #player-container {
+            z-index: 9999;
+        }
+
+        /* Ad blocking styles */
+        iframe[src*="ads"],
+        iframe[src*="banner"],
+        iframe[src*="pop"],
+        div[id*="ads"],
+        div[class*="ads"],
+        div[id*="banner"],
+        div[class*="banner"],
+        div[id*="pop"],
+        div[class*="pop"] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            height: 0 !important;
+            width: 0 !important;
+            position: absolute !important;
+            top: -9999px !important;
+            left: -9999px !important;
+        }
+
+        /* Servidor badges */
+        .server-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Loading indicator */
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #9333ea;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Estilos para conteúdo relacionado */
+        .related-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Melhorias para responsividade em telas pequenas */
+        @media (max-width: 640px) {
+            #related-content .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Estilos para o Top 10 */
+        .top10-card {
+            position: relative;
+            height: 150px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .top10-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .top10-number {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top10-number span {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 640px) {
+            .top10-card {
+                height: 120px;
+            }
+
+            .top10-card .text-sm {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Estilos para cards em grid estilo Top 10 */
+        .top10-card-grid {
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .top10-card-grid:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .top10-card-grid img {
+            transition: transform 0.3s ease;
+        }
+
+        .top10-card-grid:hover img {
+            transform: scale(1.1);
+        }
+
+        .top10-card-grid .bg-yellow-500 {
+            background-color: #E50914;
+            color: white;
+        }
+
+        .top10-card-grid h3 {
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+            #related-content .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Estilos para os cards estilo Netflix */
+        .netflix-card {
+            width: 200px;
+            background-color: #141414;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .netflix-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .poster-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .poster-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .netflix-card:hover .poster-image {
+            transform: scale(1.1);
+        }
+
+        .card-info {
+            padding: 12px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-year {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .card-rating {
+            background-color: #E50914;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .netflix-card {
+                width: 160px;
+            }
+
+            .poster-container {
+                height: 240px;
+            }
+
+            .card-title {
+                font-size: 14px;
+            }
+
+            .card-year,
+            .card-rating {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white min-h-screen text-base sm:text-lg relative">
+    <main class="relative min-h-screen">
+        <a href="index.html"
+            class="absolute top-4 left-4 z-50 bg-gray-800 bg-opacity-50 text-white px-4 py-2 rounded-full hover:bg-opacity-75 transition-colors">
+            Voltar
+        </a>
+        <div id="detalhes-container" class="relative min-h-screen overflow-hidden">
+            <!-- O conteúdo será inserido aqui pelo JavaScript -->
+        </div>
+    </main>
+    <script src="detalhes.js"></script>
+    <script>
+        // Função para bloquear anúncios nos iframes
+        function blockIframeAds() {
+            // Tenta acessar iframes e bloquear anúncios
+            try {
+                const iframes = document.querySelectorAll('iframe');
+                iframes.forEach(iframe => {
+                    try {
+                        // Tenta acessar o documento do iframe
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                        // Seleciona e remove elementos de anúncios
+                        const adSelectors = [
+                            '[id*="google_ads"]',
+                            '[id*="banner"]',
+                            '[class*="ads"]',
+                            '[id*="ads"]',
+                            '[class*="ad-"]',
+                            '[id*="ad-"]',
+                            'iframe[src*="ads"]',
+                            'iframe[src*="banner"]'
+                        ];
+
+                        adSelectors.forEach(selector => {
+                            const adElements = iframeDoc.querySelectorAll(selector);
+                            adElements.forEach(el => el.remove());
+                        });
+
+                        // Adiciona CSS para esconder anúncios
+                        const style = iframeDoc.createElement('style');
+                        style.textContent = `
+                        [id*="ads"], [class*="ads"], [id*="banner"], [class*="banner"], 
+                        [id*="pop"], [class*="pop"], iframe[src*="ads"], iframe[src*="banner"] {
+                            display: none !important;
+                            visibility: hidden !important;
+                            opacity: 0 !important;
+                            pointer-events: none !important;
+                            height: 0 !important;
+                            width: 0 !important;
+                        }
+                    `;
+                        iframeDoc.head.appendChild(style);
+
+                    } catch (e) {
+                        // Erro de acesso ao iframe (provavelmente devido a política de mesma origem)
+                        console.log('Não foi possível acessar o conteúdo do iframe:', e);
+                    }
+                });
+            } catch (e) {
+                console.log('Erro ao bloquear anúncios nos iframes:', e);
+            }
+        }
+
+        // Executa o bloqueio de anúncios periodicamente
+        setInterval(blockIframeAds, 2000);
+
+        // Também executa quando o documento estiver pronto
+        document.addEventListener('DOMContentLoaded', blockIframeAds);
+    </script>
+</body>
+
+</html>
